@@ -1,0 +1,4 @@
+data/
+__pycache__/
+database.db
+todo_list.json

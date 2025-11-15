@@ -1,0 +1,8 @@
+.git/
+.gitignore/
+__pycache__/
+data/
+database.db
+todo_list.json
+Makefile
+README.md
