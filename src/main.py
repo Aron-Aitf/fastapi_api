@@ -11,7 +11,7 @@ from routers.debug_router import router as debug_router
 app = FastAPI(
     swagger_ui_parameters={"tryItOutEnabled": True},
     title=config.docs.title,
-    debug=True,
+    debug=config.app.debug,
     version=str(config.docs.version),
     description=config.docs.description,
 )

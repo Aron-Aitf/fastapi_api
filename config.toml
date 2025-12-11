@@ -1,11 +1,12 @@
-[database]
-database_url = "postgresql://postgres:postpass@db:5432/postgres"
-use_local_database = true
-local_database_url = "sqlite:///database.db"
+[app]
+debug = true
 
 [docs]
 title = "Todo API"
 version = "1.0.0"
-description = """
-# A Todo API
-"""
+description = "# A Todo API"
+
+[database]
+database_url = "postgresql://postgres:postpass@db:5432/postgres"
+use_local_database = true
+local_database_url = "sqlite:///database.db"
