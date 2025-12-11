@@ -3,7 +3,7 @@ from sqlmodel import SQLModel, Session, create_engine
 from config import config
 
 # forces the models to load before making the tables
-from models import TodoInput as _, Todo as _  # noqa: F401, F811
+import models as _  # noqa: F401
 
 if config.database.use_local_database:
     engine = create_engine(
