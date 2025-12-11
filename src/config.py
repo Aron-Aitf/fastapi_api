@@ -1,25 +1,26 @@
-from pydantic import BaseModel, AnyUrl, PostgresDsn
+from pydantic import AnyUrl, PostgresDsn
 from pydantic_extra_types.semantic_version import SemanticVersion
+from pydantic_settings import BaseSettings
 from tomllib import load
 
 
-class DatabaseConfig(BaseModel):
+class DatabaseConfig(BaseSettings):
     database_url: PostgresDsn
     use_local_database: bool
     local_database_url: AnyUrl
 
 
-class DocsConfig(BaseModel):
+class DocsConfig(BaseSettings):
     title: str
     version: SemanticVersion
     description: str
 
 
-class AppConfig(BaseModel):
+class AppConfig(BaseSettings):
     debug: bool
 
 
-class Config(BaseModel):
+class Config(BaseSettings):
     app: AppConfig
     database: DatabaseConfig
     docs: DocsConfig
