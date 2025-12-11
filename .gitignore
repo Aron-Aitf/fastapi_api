@@ -1,4 +1,4 @@
-data/
+postgres/
 __pycache__/
-database.db
+sqlite.db
 todo_list.json

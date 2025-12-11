@@ -9,4 +9,4 @@ description = "# A Todo API"
 [database]
 database_url = "postgresql://postgres:postpass@db:5432/postgres"
 use_local_database = true
-local_database_url = "sqlite:///database.db"
+local_database_url = "sqlite:///data/database/sqlite.db"

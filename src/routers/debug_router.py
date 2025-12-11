@@ -24,7 +24,7 @@ def populate_fake_data(
     ),
     session: Session = Depends(get_session),
 ):
-    with open("todo_list.json", "r") as file:
+    with open("./data/todo_list.json", "r") as file:
         todos = load(file)[:number]
 
     todos = [Todo.model_validate(todo) for todo in todos]

@@ -12,7 +12,7 @@ todo_titles = []
 
 fake_todos: list[dict[str, str | bool | None]] = []
 
-with open("./todos.json", "r") as file:
+with open("./data/todos.json", "r") as file:
     todo_titles: list[str] = load(file)
 
 for i in range(NUM_TODOS_TO_GENERATE):
@@ -35,5 +35,5 @@ for i in range(NUM_TODOS_TO_GENERATE):
 
     fake_todos.append(fake_todo)
 
-with open("todo_list.json", "w") as file:
+with open("data/todo_list.json", "w") as file:
     dump(fake_todos, file, indent=4)
