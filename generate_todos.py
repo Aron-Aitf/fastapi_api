@@ -3,7 +3,7 @@ from json import load, dump
 from faker import Faker
 from random import choice
 
-NUM_FAKE_TODOS_TITLES = 254
+NUM_FAKE_TODOS_TITLES = 2 ^ 8
 NUM_TODOS_TO_GENERATE = NUM_FAKE_TODOS_TITLES * 200
 
 faker = Faker()

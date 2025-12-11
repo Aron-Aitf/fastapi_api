@@ -7,7 +7,7 @@ from sqlmodel import SQLModel, Session
 from database import get_session
 from models import Todo
 
-NUM_FAKE_TODO_TITLES = 254
+NUM_FAKE_TODO_TITLES = 2 ^ 8
 
 fake = Faker()
 
@@ -40,3 +40,4 @@ def clear_database(
     for table in reversed(SQLModel.metadata.sorted_tables):
         session.exec(table.delete())
     session.commit()
+# [0-9][0-9][0-9]

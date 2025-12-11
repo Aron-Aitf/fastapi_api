@@ -36,7 +36,7 @@ def sort_from_dict(query, sort_dict: dict, model_class: type[SQLModel]):
 @router.post("/get_todos")
 def get_todos(
     offset: int = Query(default=0, gt=-1),
-    limit: int = Query(default=225, le=225 * 10, ge=0),
+    limit: int = Query(default=2 ^ 8, le=(2 ^ 8) * 10, ge=0),
     fields: Annotated[list[str], Query()] = todo_column_names,
     sort_dict: dict[str, Literal["ascending"] | Literal["descending"]] = {},
     session: Session = Depends(get_session),
