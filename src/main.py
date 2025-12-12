@@ -1,12 +1,17 @@
-from fastapi import FastAPI
+from time import perf_counter
+from fastapi import FastAPI, Request
 
 from config import config
+
 from routers.meta_router import router as meta_router
 from routers.add_router import router as add_router
 from routers.query_router import router as query_router
 from routers.delete_router import router as delete_router
 from routers.update_router import router as update_router
 from routers.debug_router import router as debug_router
+
+from logger import logger
+
 
 app = FastAPI(
     swagger_ui_parameters={"tryItOutEnabled": True},
@@ -15,6 +20,35 @@ app = FastAPI(
     version=str(config.docs.version),
     description=config.docs.description,
 )
+
+
+# @app.middleware("http")
+# async def add_process_time_header(request: Request, call_next):
+#     start_time = perf_counter()
+#     response = await call_next(request)
+#     process_time = perf_counter() - start_time
+#     response.headers["X-Process-Time"] = str(process_time)
+#     return response
+
+
+@app.middleware("http")
+async def logging_and_time_middleware(request: Request, call_next):
+
+    logger.info(f"Request: {request.method} {request.url.path} received")
+    start_time = perf_counter()
+
+    response = await call_next(request)
+
+    process_time = perf_counter() - start_time
+
+    if config.app.timing_headers:
+        response.headers["X-Process-Time"] = str(process_time)
+
+    logger.info(
+        f"Response: {request.method} {request.url.path} returned status code{response.status_code} in {process_time}"
+    )
+
+    return response
 
 
 @app.get("/", tags=["Meta"])

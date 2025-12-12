@@ -1,5 +1,6 @@
 [app]
 debug = true
+timing_headers = true
 
 [docs]
 title = "Todo API"
@@ -10,3 +11,32 @@ description = "# A Todo API"
 database_url = "postgresql://postgres:postpass@db:5432/postgres"
 use_local_database = true
 local_database_url = "sqlite:///data/database/sqlite.db"
+
+[logging]
+version = 1
+
+[logging.formatters.normal_formatter]
+format = "%(levelname)s %(asctime)s %(message)s"
+datefmt = "%A, %B %d, %Y %I:%M:%S %p"
+
+[logging.formatters.json_formatter]
+"()" = "pythonjsonlogger.json.JsonFormatter"
+fmt = "%(asctime)s %(levelname)s %(message)s"
+datefmt = "%Y-%m-%dT%H:%M:%SZ"
+
+[logging.handlers.normal_file_handler]
+class = "logging.FileHandler"
+formatter = "normal_formatter"
+level = "DEBUG"
+filename = "logs/text_log.log"
+
+[logging.handlers.json_file_handler]
+class = "logging.FileHandler"
+formatter = "json_formatter"
+level = "DEBUG"
+filename = "logs/json_log.ndjson"
+
+[logging.loggers.""]
+handlers = ["normal_file_handler", "json_file_handler"]
+level = "DEBUG"
+propagate = true

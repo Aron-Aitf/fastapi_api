@@ -1,3 +1,4 @@
+from typing import Any
 from pydantic import AnyUrl, PostgresDsn
 from pydantic_extra_types.semantic_version import SemanticVersion
 from pydantic_settings import BaseSettings
@@ -18,12 +19,14 @@ class DocsConfig(BaseSettings):
 
 class AppConfig(BaseSettings):
     debug: bool
+    timing_headers: bool
 
 
 class Config(BaseSettings):
     app: AppConfig
     database: DatabaseConfig
     docs: DocsConfig
+    logging: dict[str, Any]
 
 
 with open("./config.toml", "rb") as file:
