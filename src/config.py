@@ -6,11 +6,11 @@ from tomllib import load
 
 
 class DatabaseConfig(BaseSettings):
-    database_url: PostgresDsn | None = PostgresDsn(
+    database_url: PostgresDsn = PostgresDsn(
         "postgresql://postgres:postgres@postgres:5432/postgres"
     )
     use_local_database: bool = True
-    local_database_url: AnyUrl | None = AnyUrl("sqlite:///sqlite.db")
+    local_database_url: AnyUrl = AnyUrl("sqlite:///sqlite.db")
 
 
 class DocsConfig(BaseSettings):
@@ -28,7 +28,7 @@ class Config(BaseSettings):
     app: AppConfig
     database: DatabaseConfig
     docs: DocsConfig
-    logging: dict[str, Any] | None = {}
+    logging: dict[str, Any] = {}
 
 
 with open("./config.toml", "rb") as file:
