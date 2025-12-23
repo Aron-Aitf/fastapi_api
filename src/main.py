@@ -22,17 +22,10 @@ app = FastAPI(
 )
 
 
-# @app.middleware("http")
-# async def add_process_time_header(request: Request, call_next):
-#     start_time = perf_counter()
-#     response = await call_next(request)
-#     process_time = perf_counter() - start_time
-#     response.headers["X-Process-Time"] = str(process_time)
-#     return response
-
-
 @app.middleware("http")
 async def logging_and_time_middleware(request: Request, call_next):
+
+    logger.info(f"Request: {request.method} {request.url.path} received")
     start_time = perf_counter()
 
     response = await call_next(request)
@@ -41,6 +34,10 @@ async def logging_and_time_middleware(request: Request, call_next):
 
     if config.app.timing_headers:
         response.headers["X-Process-Time"] = str(process_time)
+
+    logger.info(
+        f"Response: {request.method} {request.url.path} returned status code{response.status_code} in {process_time}"
+    )
 
     return response
 
